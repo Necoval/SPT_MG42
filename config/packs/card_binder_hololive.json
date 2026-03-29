@@ -1,0 +1,54 @@
+{
+  "item_type": "card_binder",
+  "clone_item": "5c093ca986f7740a1867ab12",
+  "id": "ac89f8a07240496c85ca28bd",
+  "item_name": "Hololive Card Binder",
+  "item_short_name": "Card Binder",
+  "item_description": "A dedicated binder for storing your Hololive OCG collection. Sized to hold one of each card in a single place.",
+  "item_parent": "62f109593b54472778797866",
+  "category_id": "5b5f6fa186f77409407a7eb7",
+  "item_prefab_path": "packs/pack_hololive.bundle",
+  "color": "blue",
+  "sold": true,
+  "lootable": false,
+  "is_loot_box": false,
+  "stack_max_size": 1,
+  "trader": "prapor",
+  "trader_loyalty_level": 1,
+  "can_sell_on_ragfair": false,
+  "currency": "roubles",
+  "price": 150000,
+  "weight": 0.9,
+  "rarity": "R",
+  "loot_locations": {},
+  "unlimited_stock": true,
+  "item_sound": "item_book",
+  "stock_amount": 999999,
+  "is_container": true,
+  "gridStructure": [
+    [
+      {
+        "width": 16,
+        "height": 10,
+        "included_filter": [
+          "57864a3d24597754843f8721"
+        ],
+        "excluded_filter": []
+      }
+    ]
+  ],
+  "allow_in_slots": [],
+  "ExternalSize": {
+    "width": 2,
+    "height": 3
+  },
+  "quest_item": false,
+  "insurancedisabled": true,
+  "availableforinsurance": false,
+  "examinedbydefault": false,
+  "isunremovable": false,
+  "discardingblock": false,
+  "isundiscardable": false,
+  "isungivable": false,
+  "discardlimit": 2
+}
