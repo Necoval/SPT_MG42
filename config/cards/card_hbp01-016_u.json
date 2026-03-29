@@ -1,0 +1,100 @@
+{
+    "clone_item": "573474f924597738002c6174",
+    "id": "70ba2c3471254d5a8b4652bd",
+    "item_name": "Nanashi Mumei [Uncommon]",
+    "item_short_name": "Mumei [U]",
+    "item_description": "Card Name: Nanashi Mumei\nCard Number: hBP01-016\nCard Type: ホロメン\nTags: #EN #Promise #トリ #絵\nRarity: U\nIncluded in Product: ブースターパック「ブルーミングレディアンス」\nColor: 白\nHP: 60\nBloom Level: Debut\nArts: アーツ リラックスタイム　10\nKeyword(s): キーワード 白いキャンバス 自分のセンターホロメンが#Promiseを持つ時、自分のデッキを１枚引く。",
+    "item_parent": "57864a3d24597754843f8721",
+    "category_id": "5b47574386f77428ca22b2f1",
+    "item_prefab_path": "cards/card_hbp01-016_u.bundle",
+    "color": "#C4C2C3",
+    "sold": false,
+    "lootable": true,
+    "stack_max_size": 10,
+    "trader": "k_collector",
+    "trader_loyalty_level": 1,
+    "can_sell_on_ragfair": false,
+    "currency": "roubles",
+    "price": 8515,
+    "weight": 0.001,
+    "rarity": "U",
+    "loot_locations": {
+        "bigmap": [
+            "578f879c24597735401e6bc6",
+            "578f8782245977354405a1e3",
+            "578f8778245977358849a9b5"
+        ],
+        "factory4_day": [
+            "578f8782245977354405a1e3",
+            "578f8778245977358849a9b5",
+            "578f87b7245977356274f2cd"
+        ],
+        "factory4_night": [
+            "578f8782245977354405a1e3",
+            "578f8778245977358849a9b5",
+            "578f87b7245977356274f2cd"
+        ],
+        "interchange": [
+            "5ad74cf586f774391278f6f0",
+            "578f879c24597735401e6bc6"
+        ],
+        "laboratory": [
+            
+            "5909d7cf86f77470ee57d75a",
+            "578f8782245977354405a1e3"
+        ],
+        "lighthouse": [
+            "5909d50c86f774659e6aaebe",
+            "5909d36d86f774660f0bb900",
+            "578f8778245977358849a9b5"
+        ],
+        "rezervbase": [
+            "578f87b7245977356274f2cd",
+            "5909d36d86f774660f0bb900",
+            "5d6fd13186f77424ad2a8c69"
+        ],
+        "sandbox": [
+            
+            "578f879c24597735401e6bc6",
+            "578f87b7245977356274f2cd"
+        ],
+        "sandbox_high": [
+            
+            "578f879c24597735401e6bc6",
+            "578f87b7245977356274f2cd"
+        ],
+        "shoreline": [
+            "578f879c24597735401e6bc6",
+            "578f8782245977354405a1e3"
+        ],
+        "tarkovstreets": [
+            "578f879c24597735401e6bc6",
+            "64d11702dd0cd96ab82c3280",
+            "578f87b7245977356274f2cd"
+        ],
+        "woods": [
+            "5d6fd13186f77424ad2a8c69",
+            "5909d50c86f774659e6aaebe",
+            "5d6d2bb386f774785b07a77a"
+        ]
+    },
+    "unlimited_stock": true,
+    "item_sound": "item_book",
+    "stock_amount": 999999,
+    "is_container": false,
+    "allow_in_slots": [],
+    "special": false,
+    "ExternalSize": {
+        "width": 1,
+        "height": 1
+    },
+    "quest_item": false,
+    "insurancedisabled": true,
+    "availableforinsurance": false,
+    "examinedbydefault": false,
+    "isunremovable": false,
+    "discardingblock": false,
+    "isundiscardable": false,
+    "isungivable": false,
+    "discardlimit": 2
+}
