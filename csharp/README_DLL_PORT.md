@@ -1,59 +1,38 @@
-# HololiveCards DLL Mod (SPT 4.0.13)
+# HololiveCards DLL Port (WIP)
 
-This mod now runs as a **C# DLL server mod** (no JavaScript entrypoint required).
+This repository originally shipped as a JavaScript server mod.
 
-## What is implemented
+To support setups that rely on assembly discovery (`*.Mod.dll` under `user/mods/<mod>`), this folder adds a C# mod scaffold:
 
-- Loads all item configs from:
-  - `config/cards/*.json`
-  - `config/packs/*.json`
-- Clones base templates and creates custom items.
-- Adds item locales and handbook entries.
-- Adds sold items to trader assort (including Prapor booster + card binder).
-- Applies ragfair/fence blacklist behavior.
-- Injects item probabilities into static loot containers.
-- Registers loot-box content into `Loot.randomLootContainers`.
-- Keeps compatibility filter patching for container grid filters.
+- `csharp/HololiveCards.Mod/HololiveCards.Mod.csproj`
+- `csharp/HololiveCards.Mod/Mod/HololiveCardsMetadata.cs`
+- `csharp/HololiveCards.Mod/Load/OnLoad.cs`
 
-## Build requirements
+## Build
 
-- .NET SDK 9+ (10.x also works)
-- `SPT_DIR` should point to your **SPT root folder** (the folder that contains `Aki_Data`).
+1. Set your SPT installation path:
 
-Example:
+   ```powershell
+   $env:SPT_DIR="C:\Tarkov\SPT"
+   ```
 
-```powershell
-$env:SPT_DIR = "C:\Tarkov\SPT"
-dotnet build csharp/HololiveCards.Mod/HololiveCards.Mod.csproj -c Release
-```
+2. Build:
 
-## Why you saw missing assembly errors before
+   ```powershell
+   dotnet build csharp/HololiveCards.Mod/HololiveCards.Mod.csproj -c Release
+   ```
 
-Your previous build attempted to resolve references from the wrong location.
-SPT assemblies are under:
+3. Copy output `HololiveCards.Mod.dll` to:
 
-- `C:\Tarkov\SPT\Aki_Data\Server\*.dll`
+   `SPT\user\mods\hololiveCards\`
 
-The updated `.csproj` now resolves references from:
+Along with:
 
-- `$(SPT_DIR)\Aki_Data\Server\...`
-
-(and has a fallback relative path for builds started from inside the mod folder).
-
-## Install into SPT
-
-After build, copy these into your mod folder:
-
-- `csharp/HololiveCards.Mod/bin/Release/net9.0/HololiveCards.Mod.dll`
 - `config/`
 - `bundles/`
 - `bundles.json`
 
-Final layout should look like:
+## Current status
 
-```text
-SPT\user\mods\hololiveCards\HololiveCards.Mod.dll
-SPT\user\mods\hololiveCards\config\...
-SPT\user\mods\hololiveCards\bundles\...
-SPT\user\mods\hololiveCards\bundles.json
-```
+The DLL currently provides bootstrap loading/logging only.
+The full functional port (items, trader offers, ragfair behavior, loot injection, profile migration) is pending migration from the JS implementation.

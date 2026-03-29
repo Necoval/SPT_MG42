@@ -6,14 +6,6 @@
     <LangVersion>preview</LangVersion>
     <AssemblyName>HololiveCards.Mod</AssemblyName>
     <RootNamespace>HololiveCards.Mod</RootNamespace>
-
-    <!--
-      SPT 4 server assemblies usually live in: $(SPT_DIR)\Aki_Data\Server
-      If SPT_DIR is not set, fallback to an SPT install where this mod repo sits inside user/mods/hololiveCards.
-    -->
-    <SptRoot Condition="'$(SPT_DIR)' != ''">$(SPT_DIR)</SptRoot>
-    <SptRoot Condition="'$(SptRoot)' == ''">$(MSBuildProjectDirectory)\..\..\..\..</SptRoot>
-    <SptServerDir>$(SptRoot)\Aki_Data\Server</SptServerDir>
   </PropertyGroup>
 
   <ItemGroup>
@@ -31,11 +23,32 @@
     </Content>
   </ItemGroup>
 
+  <!--
+    Set SPT_DIR to your local SPT server root before building.
+    Example:
+      $env:SPT_DIR="C:\Tarkov\SPT"
+      dotnet build csharp/HololiveCards.Mod/HololiveCards.Mod.csproj -c Release
+  -->
   <ItemGroup>
-    <Reference Include="SPTarkov.Server.Core" HintPath="$(SptServerDir)\SPTarkov.Server.Core.dll" Private="false" />
-    <Reference Include="SPTarkov.DI" HintPath="$(SptServerDir)\SPTarkov.DI.dll" Private="false" />
-    <Reference Include="SPTarkov.Common" HintPath="$(SptServerDir)\SPTarkov.Common.dll" Private="false" />
-    <Reference Include="SPT.Server" HintPath="$(SptServerDir)\SPT.Server.dll" Private="false" />
-    <Reference Include="SemanticVersioning" HintPath="$(SptServerDir)\SemanticVersioning.dll" Private="false" />
+    <Reference Include="SPTarkov.Server.Core">
+      <HintPath>$(SPT_DIR)\SPTarkov.Server.Core.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="SPTarkov.DI">
+      <HintPath>$(SPT_DIR)\SPTarkov.DI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="SPTarkov.Common">
+      <HintPath>$(SPT_DIR)\SPTarkov.Common.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="SPT.Server">
+      <HintPath>$(SPT_DIR)\SPT.Server.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="SemanticVersioning">
+      <HintPath>$(SPT_DIR)\SemanticVersioning.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
   </ItemGroup>
 </Project>
