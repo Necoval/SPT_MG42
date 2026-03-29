@@ -1,0 +1,6 @@
+C:\Tarkov\SPT\user\mods\hololiveCards\csharp\HololiveCards.Mod\obj\Release\net9.0\HololiveCards.Mod.csproj.AssemblyReference.cache
+C:\Tarkov\SPT\user\mods\hololiveCards\csharp\HololiveCards.Mod\obj\Release\net9.0\HololiveCards.Mod.GeneratedMSBuildEditorConfig.editorconfig
+C:\Tarkov\SPT\user\mods\hololiveCards\csharp\HololiveCards.Mod\obj\Release\net9.0\HololiveCards.Mod.AssemblyInfoInputs.cache
+C:\Tarkov\SPT\user\mods\hololiveCards\csharp\HololiveCards.Mod\obj\Release\net9.0\HololiveCards.Mod.AssemblyInfo.cs
+C:\Tarkov\SPT\user\mods\hololiveCards\csharp\HololiveCards.Mod\obj\Release\net9.0\HololiveCards.Mod.csproj.CoreCompileInputs.cache
+C:\Tarkov\SPT\user\mods\hololiveCards\csharp\HololiveCards.Mod\obj\Release\net9.0\HololiveCards.Mod.sourcelink.json

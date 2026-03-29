@@ -13,17 +13,17 @@ public sealed record HololiveCardsMetadata : AbstractModMetadata
 
     public override string License { get; init; } = "MIT";
 
-    public override string? Url { get; init; } = "https://github.com/knon/hololiveCards";
+    public override string Url { get; init; } = "https://github.com/knon/hololiveCards";
 
-    public override SemanticVersioning.Version Version { get; init; } = SemanticVersioning.Version.Parse("0.2.3");
+    public override SemanticVersioning.Version Version { get; init; } = SemanticVersioning.Version.Parse("0.2.2");
 
-    public override SemanticVersioning.Range SptVersion { get; init; } = SemanticVersioning.Range.Parse("4.0.13");
+    public override SemanticVersioning.Version SptVersion { get; init; } = SemanticVersioning.Version.Parse("4.0.13");
 
-    public override bool? IsBundleMod { get; init; } = false;
+    public override bool IsBundleMod { get; init; } = false;
 
-    public override List<string> Contributors { get; init; } = [];
+    public override string[] Contributors { get; init; } = [];
 
-    public override Dictionary<string, SemanticVersioning.Range> ModDependencies { get; init; } = new();
+    public override string[] ModDependencies { get; init; } = [];
 
-    public override List<string> Incompatibilities { get; init; } = [];
+    public override string[] Incompatibilities { get; init; } = [];
 }
