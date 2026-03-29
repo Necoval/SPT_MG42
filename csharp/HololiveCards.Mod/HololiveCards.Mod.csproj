@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>preview</LangVersion>
+    <AssemblyName>HololiveCards.Mod</AssemblyName>
+    <RootNamespace>HololiveCards.Mod</RootNamespace>
+
+    <!--
+      SPT 4 server assemblies usually live in: $(SPT_DIR)\Aki_Data\Server
+      If SPT_DIR is not set, fallback to an SPT install where this mod repo sits inside user/mods/hololiveCards.
+    -->
+    <SptRoot Condition="'$(SPT_DIR)' != ''">$(SPT_DIR)</SptRoot>
+    <SptRoot Condition="'$(SptRoot)' == ''">$(MSBuildProjectDirectory)\..\..\..\..</SptRoot>
+    <SptServerDir>$(SptRoot)\Aki_Data\Server</SptServerDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\config\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>config\%(RecursiveDir)%(Filename)%(Extension)</Link>
+    </Content>
+    <Content Include="..\..\bundles\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>bundles\%(RecursiveDir)%(Filename)%(Extension)</Link>
+    </Content>
+    <Content Include="..\..\bundles.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Link>bundles.json</Link>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SPTarkov.Server.Core" HintPath="$(SptServerDir)\SPTarkov.Server.Core.dll" Private="false" />
+    <Reference Include="SPTarkov.DI" HintPath="$(SptServerDir)\SPTarkov.DI.dll" Private="false" />
+    <Reference Include="SPTarkov.Common" HintPath="$(SptServerDir)\SPTarkov.Common.dll" Private="false" />
+    <Reference Include="SPT.Server" HintPath="$(SptServerDir)\SPT.Server.dll" Private="false" />
+    <Reference Include="SemanticVersioning" HintPath="$(SptServerDir)\SemanticVersioning.dll" Private="false" />
+  </ItemGroup>
+</Project>

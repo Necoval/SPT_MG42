@@ -2,6 +2,7 @@
     "debug": true,
     "fallback_trader": "ragman",
     "enable_container_spawns": true,
+    "force_enable_ragfair_for_cards": true,
 
     "--//Item probability scalers": "0 - 1",
     "OC": 0.18,  
