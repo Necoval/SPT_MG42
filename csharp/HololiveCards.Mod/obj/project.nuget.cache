@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "Zc+KuBBGFg4=",
+  "success": true,
+  "projectFilePath": "C:\\Tarkov\\SPT\\user\\mods\\hololiveCards\\csharp\\HololiveCards.Mod\\HololiveCards.Mod.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\renev\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.12\\microsoft.netcore.app.ref.9.0.12.nupkg.sha512",
+    "C:\\Users\\renev\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\9.0.12\\microsoft.windowsdesktop.app.ref.9.0.12.nupkg.sha512",
+    "C:\\Users\\renev\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\9.0.12\\microsoft.aspnetcore.app.ref.9.0.12.nupkg.sha512"
+  ],
+  "logs": []
+}
