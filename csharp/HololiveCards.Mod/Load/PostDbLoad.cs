@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using SPTarkov.DI.Annotations;
 using SPTarkov.Server.Core.DI;
 using SPTarkov.Server.Core.Models.Utils;
-using SPTarkov.Server.Core.Mods.Interfaces;
 using SPTarkov.Server.Core.Services;
 
 namespace HololiveCards.Mod.Load;
@@ -22,7 +21,7 @@ public sealed class PostDbLoad : IOnLoad
     private const string ModConfigPath = "config/mod_config.json";
     private const string ProbabilitiesPath = "config/probabilities.json";
 
-    private readonly ISptLogger _logger;
+    private readonly ISptLogger<PostDbLoad> _logger;
     private readonly DatabaseService _databaseService;
 
     private readonly Dictionary<string, string> _traderIds = new(StringComparer.OrdinalIgnoreCase)
@@ -43,7 +42,7 @@ public sealed class PostDbLoad : IOnLoad
         ["dollars"] = "5696686a4bdc2da3298b456a"
     };
 
-    public PostDbLoad(ISptLogger logger, DatabaseService databaseService)
+    public PostDbLoad(ISptLogger<PostDbLoad> logger, DatabaseService databaseService)
     {
         _logger = logger;
         _databaseService = databaseService;
