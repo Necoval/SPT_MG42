@@ -64,9 +64,9 @@ public sealed class PostDbLoad : IOnLoad
         dynamic tables = _databaseService.GetTables();
         EnsureCompatFilters(tables);
 
-        var templatesItems = GetDict(tables.templates.items);
-        var handbookItems = GetList(tables.templates.handbook.Items);
-        var allLocales = GetLocaleDicts(tables.locales.global);
+        IDictionary<object, object?> templatesItems = GetDict(tables.templates.items);
+        IList handbookItems = GetList(tables.templates.handbook.Items);
+        List<IDictionary<string, object?>> allLocales = GetLocaleDicts(tables.locales.global);
         var ragfairBlacklist = ResolveNestedList(tables, "globals", "config", "RagFair", "dynamic", "blacklist", "custom");
         var fenceBlacklist = ResolveNestedList(tables, "traders", "579dc571d53a0658a154fbec", "base", "blacklist");
 
@@ -86,7 +86,7 @@ public sealed class PostDbLoad : IOnLoad
                 }
 
                 var cloneItemId = GetString(config, "clone_item", string.Empty);
-                if (!templatesItems.TryGetValue(cloneItemId, out var cloneTemplate))
+                if (!templatesItems.TryGetValue(cloneItemId, out object? cloneTemplate) || cloneTemplate is null)
                 {
                     _logger.Warning($"[{ModName}] Clone template {cloneItemId} not found for {id}");
                     continue;
@@ -346,8 +346,8 @@ public sealed class PostDbLoad : IOnLoad
         var traderId = _traderIds.TryGetValue(traderName, out var mappedTraderId) ? mappedTraderId : traderName;
         var fallbackTraderId = _traderIds.TryGetValue(fallbackTrader, out var mappedFallbackTraderId) ? mappedFallbackTraderId : "54cb50c76803fa8b248b4571";
 
-        var traders = GetDict(tables.traders);
-        if (!traders.TryGetValue(traderId, out var traderObj))
+        IDictionary<object, object?> traders = GetDict(tables.traders);
+        if (!traders.TryGetValue(traderId, out object? traderObj))
         {
             if (!traders.TryGetValue(fallbackTraderId, out traderObj))
             {
@@ -408,10 +408,10 @@ public sealed class PostDbLoad : IOnLoad
         var rarity = GetString(config, "rarity", "C");
         var rarityScale = GetDouble(modConfig, rarity, 0.1d);
 
-        var locations = GetDict(tables.locations);
+        IDictionary<object, object?> locations = GetDict(tables.locations);
         foreach (var mapEntry in lootLocations.EnumerateObject())
         {
-            if (!locations.TryGetValue(mapEntry.Name, out var mapObj))
+            if (!locations.TryGetValue(mapEntry.Name, out object? mapObj))
             {
                 continue;
             }
