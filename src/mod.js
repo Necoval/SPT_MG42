@@ -37,6 +37,7 @@ class Mod {
     }
     preSptLoad(container) {
         this.container = container;
+        console.log(`[${this.modName}] : preSptLoad`);
         this.fixStupidMongoIds();
     }
     postDBLoad(container) {
@@ -304,6 +305,10 @@ class Mod {
         }
     }
     fixStupidMongoIds() {
+        if (!this.container || typeof this.container.afterResolution !== "function") {
+            console.log(`[${this.modName}] : Skipping GameController profile patch (afterResolution unavailable)`);
+            return;
+        }
         // On game start, see if we need to fix issues from previous versions
         // Note: We do this as a method replacement so we can run _before_ SPT's gameStart
         this.container.afterResolution("GameController", (_, result) => {

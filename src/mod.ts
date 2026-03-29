@@ -30,6 +30,7 @@ class Mod implements IPreSptLoadMod, IPostDBLoadMod
     public preSptLoad(container: DependencyContainer): void
     {
         this.container = container
+        console.log(`[${this.modName}] : preSptLoad`);
         this.fixStupidMongoIds();
     }
 
@@ -360,6 +361,12 @@ class Mod implements IPreSptLoadMod, IPostDBLoadMod
     }
 
     public fixStupidMongoIds(): void {
+        if (!this.container || typeof (this.container as any).afterResolution !== "function")
+        {
+            console.log(`[${this.modName}] : Skipping GameController profile patch (afterResolution unavailable)`);
+            return;
+        }
+
         // On game start, see if we need to fix issues from previous versions
         // Note: We do this as a method replacement so we can run _before_ SPT's gameStart
         this.container.afterResolution("GameController", (_, result: GameController) => {
