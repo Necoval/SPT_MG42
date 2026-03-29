@@ -1,0 +1,18 @@
+{
+    "debug": true,
+    "fallback_trader": "ragman",
+    "enable_container_spawns": true,
+
+    "--//Item probability scalers": "0 - 1",
+    "OC": 0.18,  
+    "C": 0.2,       
+    "U": 0.15,     
+    "R": 0.13,         
+    "OSR": 0.1,  
+    "RR": 0.09,      
+    "OUR": 0.65,  
+    "P": 0.05,        
+    "UR": 0.6,   
+    "SEC": 0.05,
+    "YAG": 0.005   
+}
