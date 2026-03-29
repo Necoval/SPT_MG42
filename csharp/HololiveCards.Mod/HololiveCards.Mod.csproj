@@ -6,7 +6,14 @@
     <LangVersion>preview</LangVersion>
     <AssemblyName>HololiveCards.Mod</AssemblyName>
     <RootNamespace>HololiveCards.Mod</RootNamespace>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Load/Bootstrap.cs" />
+    <Compile Include="Load/PostDbLoad.cs" />
+    <Compile Include="Mod/HololiveCardsMetadata.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <Content Include="..\..\config\**\*">
@@ -23,32 +30,9 @@
     </Content>
   </ItemGroup>
 
-  <!--
-    Set SPT_DIR to your local SPT server root before building.
-    Example:
-      $env:SPT_DIR="C:\Tarkov\SPT"
-      dotnet build csharp/HololiveCards.Mod/HololiveCards.Mod.csproj -c Release
-  -->
   <ItemGroup>
-    <Reference Include="SPTarkov.Server.Core">
-      <HintPath>$(SPT_DIR)\SPTarkov.Server.Core.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="SPTarkov.DI">
-      <HintPath>$(SPT_DIR)\SPTarkov.DI.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="SPTarkov.Common">
-      <HintPath>$(SPT_DIR)\SPTarkov.Common.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="SPT.Server">
-      <HintPath>$(SPT_DIR)\SPT.Server.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="SemanticVersioning">
-      <HintPath>$(SPT_DIR)\SemanticVersioning.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
+    <PackageReference Include="SPTarkov.Server.Core" Version="4.0.13" />
+    <PackageReference Include="SPTarkov.DI" Version="4.0.13" />
+    <PackageReference Include="SPTarkov.Common" Version="4.0.13" />
   </ItemGroup>
 </Project>

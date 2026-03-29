@@ -1,38 +1,43 @@
-# HololiveCards DLL Port (WIP)
+# HololiveCards DLL Mod (SPT 4.0.13)
 
-This repository originally shipped as a JavaScript server mod.
+This mod is now **DLL-only** (no JavaScript loader required).
 
-To support setups that rely on assembly discovery (`*.Mod.dll` under `user/mods/<mod>`), this folder adds a C# mod scaffold:
+## What is implemented
 
-- `csharp/HololiveCards.Mod/HololiveCards.Mod.csproj`
-- `csharp/HololiveCards.Mod/Mod/HololiveCardsMetadata.cs`
-- `csharp/HololiveCards.Mod/Load/OnLoad.cs`
+- Loads all item configs from:
+  - `config/cards/*.json`
+  - `config/packs/*.json`
+- Clones base templates and creates custom items.
+- Adds locales and handbook entries.
+- Adds sold items to trader assort (booster + binder on Prapor via config).
+- Applies ragfair/fence blacklist rules.
+- Injects static loot probabilities.
+- Registers loot-box reward pools in random loot containers.
+- Applies compatibility filter fixes for missing container filters.
 
 ## Build
 
-1. Set your SPT installation path:
+From mod root:
 
-   ```powershell
-   $env:SPT_DIR="C:\Tarkov\SPT"
-   ```
+```powershell
+dotnet build csharp/HololiveCards.Mod/HololiveCards.Mod.csproj -c Release
+```
 
-2. Build:
+### Notes
 
-   ```powershell
-   dotnet build csharp/HololiveCards.Mod/HololiveCards.Mod.csproj -c Release
-   ```
+- Build now uses NuGet package references for SPT 4.0.13 assemblies (`SPTarkov.Server.Core`, `SPTarkov.DI`, `SPTarkov.Common`), so you do not need to point `SPT_DIR` at local DLLs.
+- The project explicitly compiles only:
+  - `Load/Bootstrap.cs`
+  - `Load/PostDbLoad.cs`
+  - `Mod/HololiveCardsMetadata.cs`
 
-3. Copy output `HololiveCards.Mod.dll` to:
+  This prevents stale local files (for example an old `Load/OnLoad.cs`) from being compiled accidentally.
 
-   `SPT\user\mods\hololiveCards\`
+## Install into SPT
 
-Along with:
+Copy these into `SPT\user\mods\hololiveCards\`:
 
+- `csharp/HololiveCards.Mod/bin/Release/net9.0/HololiveCards.Mod.dll`
 - `config/`
 - `bundles/`
 - `bundles.json`
-
-## Current status
-
-The DLL currently provides bootstrap loading/logging only.
-The full functional port (items, trader offers, ragfair behavior, loot injection, profile migration) is pending migration from the JS implementation.
