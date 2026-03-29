@@ -4,8 +4,9 @@
     "author": "knon",
     "license": "MIT",
     "main": "src/mod.js",
+    "akiVersion": "4.0.13",
     "sptVersion": "4.0.13",
-    "isBundleMod": true,
+    "isBundleMod": false,
     "scripts": {
         "setup": "npm i",
         "build": "node ./packageBuild.ts"
