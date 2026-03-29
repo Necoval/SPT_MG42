@@ -3,7 +3,7 @@
     "version": "0.1.3",
     "author": "knon",
     "license": "MIT",
-    "main": "mod.js",
+    "main": "src/mod.js",
     "akiVersion": "4.0.13",
     "sptVersion": "4.0.13",
     "isBundleMod": false,
