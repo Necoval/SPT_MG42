@@ -80,7 +80,9 @@ class Mod {
             this.addToRandomLootContainers(configInventory, config);
             this.addItemToTrophyStand(tables, config);
             fenceBlacklist.push(config.id);
-            ragfairBlacklist.push(config.id);
+            if (!config.can_sell_on_ragfair) {
+                ragfairBlacklist.push(config.id);
+            }
         });
         this.logger.log(`[${this.modName}] : ホロライブOCG Cards active.`, "blue");
     }
@@ -122,7 +124,8 @@ class Mod {
         item._props.IsUndiscardable = config.isundiscardable;
         item._props.IsUngivable = config.isungivable;
         item._props.DiscardLimit = config.discardlimit;
-        item._props.CanSellOnRagfair = config.can_sell_on_ragfair;
+        const forceEnableRagfair = modConfig["force_enable_ragfair_for_cards"] === true;
+        item._props.CanSellOnRagfair = forceEnableRagfair || config.can_sell_on_ragfair === true;
         if (config.gridStructure) {
             this.debug_to_console(`Creating grid for ${config.item_name}`, "blue");
             item._props.Grids = this.createGrid(config);
