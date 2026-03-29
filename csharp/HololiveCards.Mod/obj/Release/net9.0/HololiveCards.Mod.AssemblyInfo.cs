@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HololiveCards.Mod")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+abe78cf53134e66bd74e254c0d91c7875d65d1d9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e5b6d694b05bc2bea490e8341b8e114a8b7e3d02")]
 [assembly: System.Reflection.AssemblyProductAttribute("HololiveCards.Mod")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HololiveCards.Mod")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
