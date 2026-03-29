@@ -53,7 +53,6 @@ class Mod {
         const configTraders = configServer.getConfigByString("spt-trader");
         const configInventory = configServer.getConfigByString("spt-inventory");
         const configRagfair = configServer.getConfigByString("spt-ragfair");
-        const giftList = configServer.getConfigByString("spt-gifts");
         const fenceBlacklist = configTraders["fence"]["blacklist"];
         const ragfairBlacklist = configRagfair["dynamic"]["blacklist"]["custom"];
         const traderIDs = {
@@ -92,8 +91,8 @@ class Mod {
             }];
         for (const itemKey in tables.templates.items) {
             const item = tables.templates.items[itemKey];
-            if (["5448e53e4bdc2d60728b4567", "5448bf274bdc2dfc2f8b456a"].includes(item._parent) && item._id !== "5c0a794586f77461c458f892") {
-                if (!item._props.Grids[0]._props.filters) {
+            if (["5448e53e4bdc2d60728b4567", "5448bf274bdc2dfc2f8b456a"].includes(item?._parent) && item?._id !== "5c0a794586f77461c458f892") {
+                if (item?._props?.Grids?.[0]?._props && !item._props.Grids[0]._props.filters) {
                     item._props.Grids[0]._props.filters = compatFiltersElement;
                 }
             }
@@ -198,9 +197,14 @@ class Mod {
                 const selectedContainerID = map.staticLoot[containerID] ? containerID : (map.staticLoot[defaultContainerID] ? defaultContainerID : null);
                 this.debug_to_console(`Container ID: ${selectedContainerID}`, "blue");
                 if (selectedContainerID) {
-                    let probability = {
+                    const maxFound = relativeProbabilities?.[map_name]?.[selectedContainerID]?.["max_found"];
+                    if (typeof maxFound !== "number") {
+                        this.debug_to_console(`Missing probability data for ${map_name}/${selectedContainerID}`, "yellow");
+                        return;
+                    }
+                    const probability = {
                         "tpl": config.id,
-                        "relativeProbability": Math.ceil(relativeProbabilities[map_name][selectedContainerID]["max_found"] * modConfig[config.rarity])
+                        "relativeProbability": Math.ceil(maxFound * modConfig[config.rarity])
                     };
                     const container = map.staticLoot[selectedContainerID];
                     if (container.itemDistribution) {
@@ -352,7 +356,7 @@ class Mod {
             });
         };
         // Update rewards for Repeatable Quests
-        pmcProfile.RepeatableQuests.forEach(questType => {
+        pmcProfile.RepeatableQuests?.forEach(questType => {
             updateQuestRewards(questType.activeQuests);
             updateQuestRewards(questType.inactiveQuests);
         });
