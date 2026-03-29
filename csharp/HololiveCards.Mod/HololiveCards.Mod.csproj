@@ -12,6 +12,7 @@
   <ItemGroup>
     <Compile Include="Load/Bootstrap.cs" />
     <Compile Include="Load/PostDbLoad.cs" />
+    <Compile Include="Mod/HololiveCardsMetadata.cs" />
   </ItemGroup>
 
   <ItemGroup>
