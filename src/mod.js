@@ -37,6 +37,7 @@ class Mod {
     }
     preSptLoad(container) {
         this.container = container;
+        console.log(`[${this.modName}] : preSptLoad`);
         this.fixStupidMongoIds();
     }
     postDBLoad(container) {
@@ -53,7 +54,6 @@ class Mod {
         const configTraders = configServer.getConfigByString("spt-trader");
         const configInventory = configServer.getConfigByString("spt-inventory");
         const configRagfair = configServer.getConfigByString("spt-ragfair");
-        const giftList = configServer.getConfigByString("spt-gifts");
         const fenceBlacklist = configTraders["fence"]["blacklist"];
         const ragfairBlacklist = configRagfair["dynamic"]["blacklist"]["custom"];
         const traderIDs = {
@@ -81,7 +81,9 @@ class Mod {
             this.addToRandomLootContainers(configInventory, config);
             this.addItemToTrophyStand(tables, config);
             fenceBlacklist.push(config.id);
-            ragfairBlacklist.push(config.id);
+            if (!config.can_sell_on_ragfair) {
+                ragfairBlacklist.push(config.id);
+            }
         });
         this.logger.log(`[${this.modName}] : ホロライブOCG Cards active.`, "blue");
     }
@@ -92,8 +94,8 @@ class Mod {
             }];
         for (const itemKey in tables.templates.items) {
             const item = tables.templates.items[itemKey];
-            if (["5448e53e4bdc2d60728b4567", "5448bf274bdc2dfc2f8b456a"].includes(item._parent) && item._id !== "5c0a794586f77461c458f892") {
-                if (!item._props.Grids[0]._props.filters) {
+            if (["5448e53e4bdc2d60728b4567", "5448bf274bdc2dfc2f8b456a"].includes(item?._parent) && item?._id !== "5c0a794586f77461c458f892") {
+                if (item?._props?.Grids?.[0]?._props && !item._props.Grids[0]._props.filters) {
                     item._props.Grids[0]._props.filters = compatFiltersElement;
                 }
             }
@@ -123,7 +125,8 @@ class Mod {
         item._props.IsUndiscardable = config.isundiscardable;
         item._props.IsUngivable = config.isungivable;
         item._props.DiscardLimit = config.discardlimit;
-        item._props.CanSellOnRagfair = config.can_sell_on_ragfair;
+        const forceEnableRagfair = modConfig["force_enable_ragfair_for_cards"] === true;
+        item._props.CanSellOnRagfair = forceEnableRagfair || config.can_sell_on_ragfair === true;
         if (config.gridStructure) {
             this.debug_to_console(`Creating grid for ${config.item_name}`, "blue");
             item._props.Grids = this.createGrid(config);
@@ -198,9 +201,14 @@ class Mod {
                 const selectedContainerID = map.staticLoot[containerID] ? containerID : (map.staticLoot[defaultContainerID] ? defaultContainerID : null);
                 this.debug_to_console(`Container ID: ${selectedContainerID}`, "blue");
                 if (selectedContainerID) {
-                    let probability = {
+                    const maxFound = relativeProbabilities?.[map_name]?.[selectedContainerID]?.["max_found"];
+                    if (typeof maxFound !== "number") {
+                        this.debug_to_console(`Missing probability data for ${map_name}/${selectedContainerID}`, "yellow");
+                        return;
+                    }
+                    const probability = {
                         "tpl": config.id,
-                        "relativeProbability": Math.ceil(relativeProbabilities[map_name][selectedContainerID]["max_found"] * modConfig[config.rarity])
+                        "relativeProbability": Math.ceil(maxFound * modConfig[config.rarity])
                     };
                     const container = map.staticLoot[selectedContainerID];
                     if (container.itemDistribution) {
@@ -297,6 +305,10 @@ class Mod {
         }
     }
     fixStupidMongoIds() {
+        if (!this.container || typeof this.container.afterResolution !== "function") {
+            console.log(`[${this.modName}] : Skipping GameController profile patch (afterResolution unavailable)`);
+            return;
+        }
         // On game start, see if we need to fix issues from previous versions
         // Note: We do this as a method replacement so we can run _before_ SPT's gameStart
         this.container.afterResolution("GameController", (_, result) => {
@@ -352,7 +364,7 @@ class Mod {
             });
         };
         // Update rewards for Repeatable Quests
-        pmcProfile.RepeatableQuests.forEach(questType => {
+        pmcProfile.RepeatableQuests?.forEach(questType => {
             updateQuestRewards(questType.activeQuests);
             updateQuestRewards(questType.inactiveQuests);
         });
